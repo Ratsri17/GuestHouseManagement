@@ -2,7 +2,7 @@
 require_once('bdd.php');
 
 
-$sql = "SELECT * FROM events ";
+$sql = "SELECT id, title, start, end, color FROM events ";
 
 $req = $bdd->prepare($sql);
 $req->execute();
@@ -61,24 +61,7 @@ $events = $req->fetchAll();
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">NITRR Calendar</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="index.php">Home</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+            
         </div>
         <!-- /.container -->
     </nav>
@@ -88,7 +71,7 @@ $events = $req->fetchAll();
 
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>Availability Calendar</h1>
+                <h1></h1>
 
                 <div id="calendar" class="col-centered">
                 </div>
@@ -105,55 +88,43 @@ $events = $req->fetchAll();
 
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Book Here</h4>
+				<h4 class="modal-title" id="myModalLabel">Add Event</h4>
 			  </div>
 			  <div class="modal-body">
-          <div class="form-group">
-        <label for="title" class="col-sm-2 control-label">Title</label>
-        <div class="col-sm-10">
-          <select name="title" class="form-control" id="title">
-            <option value="">Select</option>
-             <option value="Mr"> Mr.</option>
-             <option value="Mrs"> Mrs.</option>
-             <option value="Dr"> Dr.</option>
-          </select>
-        </div>
-        </div>
+
 				  <div class="form-group">
-					<label for="VisName" class="col-sm-2 control-label">Visitor's Name</label>
+					<label for="title" class="col-sm-2 control-label">Title</label>
 					<div class="col-sm-10">
-					  <input type="text" name="VisName" class="form-control" id="VisName" placeholder="Title">
+					  <input type="text" name="title" class="form-control" id="title" placeholder="Title">
 					</div>
 				  </div>
           <div class="form-group">
-         <label for="PosAddress" class="col-sm-2 control-label">Postal Address</label>
+         <label for="color" class="col-sm-2 control-label">Room</label>
          <div class="col-sm-10">
-           <input type="text" name="PosAddress" class="form-control" id="PosAddress" placeholder="Postal Address">
+           <select name="color" class="form-control" id="color">
+             <option value="">Select</option>
+              <option value="#FF0000">&#9724; 1</option>
+              <option value="#FF0000">&#9724; 2</option>
+              <option value="#FF0000">&#9724; 3</option>
+
+           </select>
          </div>
          </div>
-         <div class="form-group">
-       <label for="Category" class="col-sm-2 control-label">Category of Guest</label>
-       <div class="col-sm-10">
-         <select name="Category" class="form-control" id="Category">
-           <option value="">Select</option>
-            <option value="A"> A</option>
-            <option value="B"> B</option>
-            <option value="C"> C</option>
-         </select>
-       </div>
-       </div>
-       <div class="form-group">
-      <label for="NumberRoom"class="col-sm-2 control-label">Number of Rooms</label>
-      <div class="col-sm-10">
-        <select name="NumberRoom" class="form-control" id="NumberRoom">
-          <option value="">Select</option>
-           <option value="1"> 1</option>
-           <option value="2"> 2</option>
-           <option value="3"> 3</option>
-        </select>
-      </div>
-      </div>
-			<div class="form-group">
+				  <div class="form-group">
+					<label for="color" class="col-sm-2 control-label">Book</label>
+					<div class="col-sm-10">
+					  <select name="color" class="form-control" id="color">
+						  <option value="">Select</option>
+              <option style="color:#FF0000;" value="#FF0000">&#9724; Yes</option>
+						  <option style="color:#008000;" value="#008000">&#9724; No</option>
+
+
+
+
+						</select>
+					</div>
+				  </div>
+				  <div class="form-group">
 					<label for="start" class="col-sm-2 control-label">Start date</label>
 					<div class="col-sm-10">
 					  <input type="text" name="start" class="form-control" id="start" readonly>
@@ -162,36 +133,9 @@ $events = $req->fetchAll();
 				  <div class="form-group">
 					<label for="end" class="col-sm-2 control-label">End date</label>
 					<div class="col-sm-10">
-					  <input type="text" name="end" class="form-control" id="end">
+					  <input type="text" name="end" class="form-control" id="end" readonly>
 					</div>
 				  </div>
-          <div class="form-group">
-         <label class="col-sm-6 control-label">Person Making the Booking</label>
-         </div>
-         <div class="form-group">
-         <label for="FName"class="col-sm-2 control-label">Full Name</label>
-         <div class="col-sm-10">
-           <input type="text" name="FName" class="form-control" id="FName" placeholder="Full Name">
-         </div>
-         </div>
-         <div class="form-group">
-         <label for="Designation" class="col-sm-2 control-label">Designation</label>
-         <div class="col-sm-10">
-           <input type="text" name="Designation" class="form-control" id="Designation" placeholder="Designation">
-         </div>
-         </div>
-         <div class="form-group">
-         <label for="Department" class="col-sm-2 control-label">Department</label>
-         <div class="col-sm-10">
-           <input type="text" name="Department" class="form-control" id="Department" placeholder="Department">
-         </div>
-         </div>
-         <div class="form-group">
-         <label for="Number" class="col-sm-2 control-label">Mobile No</label>
-         <div class="col-sm-10">
-           <input type="text" name="Number" class="form-control" id="Number" placeholder="Mobile Number">
-         </div>
-         </div>
 
 			  </div>
 			  <div class="modal-footer">
@@ -341,7 +285,7 @@ $events = $req->fetchAll();
 			?>
 				{
 					id: '<?php echo $event['id']; ?>',
-					title: '<?php echo $event['availability']; ?>',
+					title: '<?php echo $event['title']; ?>',
 					start: '<?php echo $start; ?>',
 					end: '<?php echo $end; ?>',
 					color: '<?php echo $event['color']; ?>',
